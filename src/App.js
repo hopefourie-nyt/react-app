@@ -6,7 +6,7 @@ function App() {
   const [data, setData] = React.useState(null);
 
   useEffect(() => {
-    fetch("/api")
+    fetch("http://abra.localhost.nytimes.com:3001/api")
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
