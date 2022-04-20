@@ -1,29 +1,32 @@
-import React, {useEffect} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Test from "./Test"
+import "./App.css";
 
 function App() {
-  const [data, setData] = React.useState(null);
+  const [tests, setTests] = React.useState([]);
+  console.log("in App", tests)
 
   useEffect(() => {
     fetch("http://abra.localhost.nytimes.com:3001/api")
       .then((res) => res.json())
-      .then((data) => setData(data.message));
+      .then((data) => setTests(data.message));
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Hope's Nginx Example Site
+        </h1>
+        <p>
+          {!tests
+            ? "Loading..."
+            : tests.map((test) => {
+              console.log("in .map", test)
+                return (
+                  <Test test={test}/>
+                );
+              })}
+        </p>
       </header>
     </div>
   );
